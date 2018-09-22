@@ -8,15 +8,18 @@ class Timer extends Component {
   }
 
   // add your code here
+  componentDidMount(){
+    this.interval= setInterval(this.clockTick, 1000)
+  }
 
-
-
-
-
-
+  componentWillUnmount(){
+    clearInterval(this.interval)
+  }
+  // if don't unmount, but delete element from page (ie with eventlistener)
+  // will there still be a memory leak?
 
   render() {
-
+    // console.log("render", this.state);
     const { time, color, className } = this.state
     return (
       <section className="Timer" style={{background: color}}>
@@ -45,7 +48,6 @@ class Timer extends Component {
   handleClose = () => {
     this.props.removeTimer(this.props.id)
   }
-
 
 }
 
